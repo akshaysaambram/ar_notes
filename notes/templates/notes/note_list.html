@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Ar Notes | Notes
+{% endblock title %}
+
+{% block content %}
+<div class="container wrapper pb-5 vh-100">
+    <div class="row justify-content-center justify-content-md-start mt-3 pb-5">
+        <div class="col-12">
+            <div class="row">
+                <div class="col"><h2>Notes</h2></div>
+                <div class="col text-end"><a href="{% url 'note-create' %}" class="btn btn-outline-primary">Add Notes</a></div>
+                <hr class="my-3">
+            </div>
+        </div>
+        {% for note in notes %}
+            <div class="col-10 col-md-6 col-lg-4">
+                <div class="card my-2">
+                    <div class="card-header">
+                        <div class="d-flex justify-content-between">
+                            <div>
+                                {{ note.title }}
+                            </div>
+                            <div class="d-flex gap-2">
+                                <a href="{% url 'note-update' note.id %}"><ion-icon name="create-outline"></ion-icon></a>
+                                <a class="text-danger" href="{% url 'note-delete' note.id %}"><ion-icon name="trash-outline"></ion-icon></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <pre>{{ note.content }}</pre>
+                        <div class="text-end text-muted">
+                            - {{ note.created_at | date:"M d, Y, H:i" }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% empty %}
+            <div class="col-12">
+                <div class="d-flex justify-content-center align-items-center" style="height: 330px;">
+                    <h3 class="display-6">No notes have been added yet.</h3>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+    <div class="mt-5 pt-2"></div>
+
+    <nav class="bg-white fixed-bottom pt-4 w-100">
+        <ul class="pagination justify-content-center">
+            <li class="page-item{% if not page_obj.has_previous %} disabled{% endif %}">
+                <a class="page-link" href="{% if page_obj.has_previous %}?page=1{% endif %}" tabindex="-1" aria-disabled="{{ page_obj.has_previous }}">First</a>
+            </li>
+            <li class="page-item{% if not page_obj.has_previous %} disabled{% endif %}">
+                <a class="page-link" href="{% if page_obj.has_previous %}?page={{ page_obj.previous_page_number }}{% endif %}" tabindex="-1" aria-disabled="{{ page_obj.has_previous }}">&laquo; Previous</a>
+            </li>
+            {% for page in page_obj.paginator.page_range %}
+                {% if page_obj.number == page %}
+                    <li class="page-item active" aria-current="page">
+                        <a class="page-link" href="#">{{ page }} <span class="visually-hidden">(current)</span></a>
+                    </li>
+                {% else %}
+                    <li class="page-item"><a class="page-link" href="?page={{ page }}">{{ page }}</a></li>
+                {% endif %}
+            {% endfor %}
+            <li class="page-item{% if not page_obj.has_next %} disabled{% endif %}">
+                <a class="page-link" href="{% if page_obj.has_next %}?page={{ page_obj.next_page_number }}{% endif %}">&raquo; Next</a>
+            </li>
+            <li class="page-item{% if not page_obj.has_next %} disabled{% endif %}">
+                <a class="page-link" href="{% if page_obj.has_next %}?page={{ page_obj.paginator.num_pages }}{% endif %}">Last</a>
+            </li>
+        </ul>
+    </nav>
+</div>
+{% endblock content %}

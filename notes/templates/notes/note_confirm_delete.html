@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Ar Notes | Note Delete
+{% endblock title %}
+
+{% block content %}
+<div class="container wrapper min-vh-100">
+    <div class="row justify-content-center align-items-center h-100">
+        <div class="col-10 col-md-6">
+            <div class="card my-5">
+                <div class="card-body">
+                    <form action="" method="post">
+                        {% csrf_token %}
+                        
+                        <h2 class="display-4">Delete Note</h2>
+                        <p class="lead text-muted">Are you sure? You want to delete the below task?</p>
+            
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="d-flex justify-content-between">
+                                    <div>
+                                        {{ note.title }}
+                                    </div>
+                                    <div class="d-flex gap-2">
+                                        <a href="{% url 'note-update' note.id %}"><ion-icon name="create-outline"></ion-icon></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <pre>{{ note.content }}</pre>
+                                <div class="text-end text-muted">
+                                    - {{ note.created_at | date:"M d, Y, H:i" }}
+                                </div>
+                            </div>
+                        </div>
+            
+                        <div class=" text-center my-3">
+                            <input type="submit" class="btn btn-outline-danger" value="Delete">
+                            <a href="{% url 'note-list' %}" class="btn btn-outline-secondary">Cancel</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

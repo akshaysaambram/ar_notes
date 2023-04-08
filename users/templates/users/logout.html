@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Ar Notes | Logout
+{% endblock title %}
+
+{% block content %}
+<div class="container wrapper vh-100">
+    <div class="row justify-content-center align-items-center h-100">
+        <div class="col-10 col-md-8">
+            <div class="card">
+                <div class="card-body text-center">
+                    <h2 class="display-5">Logout</h2>
+                    <p class="lead text-muted">You have been logged out</p>
+                    <hr>
+                    <a href="{% url 'login' %}" class="btn btn-outline-primary">Login back again</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

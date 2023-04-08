@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+    Ar Notes | Update Profile
+{% endblock title %}
+
+{% block content %}
+<div class="container wrapper min-vh-100">
+    <div class="row align-items-center text-center text-md-start mx-2 mx-md-5 mb-4 h-100">
+        <div class="card my-4">
+            <div class="card-body">
+                <div class="col-10 col-md-10 mx-auto">
+                    <h2 class="display-6 mb-4">Update Profile</h2>
+                    <hr>
+                    <form class="form-group" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                {{ u_form.username | as_crispy_field }}
+                            </div>
+                            <div class="col-md-6">
+                                {{ u_form.email | as_crispy_field }}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                {{ u_form.first_name | as_crispy_field }}
+                            </div>
+                            <div class="col-md-6">
+                                {{ u_form.last_name | as_crispy_field }}
+                            </div>
+                        </div>
+
+                        <div class="mx-auto wrapper-img-form">
+                            {{ p_form | crispy }}
+                        </div>
+
+                        
+                        <div class="text-center">
+                            <input class="btn btn-outline-success" type="submit" value="Update">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>   
+    </div>
+</div>
+{% endblock content %}

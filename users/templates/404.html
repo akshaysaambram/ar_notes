@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Ar Notes | 404 Error
+{% endblock title %}
+
+{% block content %}
+<div class="container wrapper vh-100">
+    <div class="row justify-content-center align-items-center h-100">
+        <div class="col-10 col-md-8">
+            <div class="card">
+                <div class="card-body text-center">
+                    <h2 class="display-5">404 Error</h2>
+                    <p class="lead text-muted">Oops! You might be confused.</p>
+                    <hr>
+                    <a href="{% url 'home' %}" class="btn btn-outline-primary">Back to home</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
